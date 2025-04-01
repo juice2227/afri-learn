@@ -29,24 +29,29 @@ import axios from "axios";
 
 const CourseCard = ({ course, onClick, isListView }) => (
   <div
-    className={`bg-gray-800 text-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform cursor-pointer ${isListView ? 'flex' : 'block'
-      }`}
+    className={`bg-gray-800 text-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform cursor-pointer ${
+      isListView ? "flex" : "block"
+    }`}
     onClick={() => onClick(course)}
   >
     <img
       src={course.thumbnailImage}
       alt={course.title}
-      className={`object-cover ${isListView ? 'w-48 h-full' : 'w-full h-40'}`}
+      className={`object-cover ${isListView ? "w-48 h-full" : "w-full h-40"}`}
     />
     <div className="p-4 flex-1">
-      <h2 className="text-xl font-bold text-red-500 truncate">{course.title}</h2>
+      <h2 className="text-xl font-bold text-red-500 truncate">
+        {course.title}
+      </h2>
       <p className="text-sm text-gray-400">{course.category}</p>
       <p className="mt-2 text-red-400 font-bold">{course.price} KSH</p>
       <p className="mt-1 text-sm text-gray-300">
         {course.numberOfLessons} lessons | {course.duration} hours
       </p>
       {isListView && (
-        <p className="mt-2 text-sm text-gray-400 line-clamp-2">{course.overview}</p>
+        <p className="mt-2 text-sm text-gray-400 line-clamp-2">
+          {course.overview}
+        </p>
       )}
     </div>
   </div>
@@ -73,16 +78,20 @@ const CourseModal = ({ course, onClose }) => (
         <p className="text-gray-400">{course.overview}</p>
         <div className="mt-4 grid grid-cols-2 gap-4">
           <p className="text-sm text-gray-400">
-            <span className="font-semibold text-gray-200">Instructor:</span> {course.instructor}
+            <span className="font-semibold text-gray-200">Instructor:</span>{" "}
+            {course.instructor}
           </p>
           <p className="text-sm text-gray-400">
-            <span className="font-semibold text-gray-200">Category:</span> {course.category}
+            <span className="font-semibold text-gray-200">Category:</span>{" "}
+            {course.category}
           </p>
           <p className="text-sm text-gray-400">
-            <span className="font-semibold text-gray-200">Price:</span> {course.price} KSH
+            <span className="font-semibold text-gray-200">Price:</span>{" "}
+            {course.price} KSH
           </p>
           <p className="text-sm text-gray-400">
-            <span className="font-semibold text-gray-200">Duration:</span> {course.duration} hours
+            <span className="font-semibold text-gray-200">Duration:</span>{" "}
+            {course.duration} hours
           </p>
         </div>
       </div>
@@ -152,13 +161,18 @@ const CourseList = () => {
 
   return (
     <div
-      className={`p-6 min-h-screen ${isDarkMode ? "bg-black text-white" : "bg-gray-100 text-black"
-        }`}
+      className={`p-6 min-h-screen ${
+        isDarkMode ? "bg-black text-white" : "bg-gray-100 text-black"
+      }`}
     >
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-red-500">Courses</h1>
         <Button variant="outline" size="icon" onClick={toggleDarkMode}>
-          {isDarkMode ? <Sun className="h-5 w-5 text-yellow-400" /> : <Moon className="h-5 w-5 text-gray-800" />}
+          {isDarkMode ? (
+            <Sun className="h-5 w-5 text-yellow-400" />
+          ) : (
+            <Moon className="h-5 w-5 text-gray-800" />
+          )}
         </Button>
       </div>
 
@@ -201,7 +215,8 @@ const CourseList = () => {
                       <SelectContent>
                         {categories.map((category) => (
                           <SelectItem key={category} value={category}>
-                            {category.charAt(0).toUpperCase() + category.slice(1)}
+                            {category.charAt(0).toUpperCase() +
+                              category.slice(1)}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -209,7 +224,9 @@ const CourseList = () => {
                   </div>
 
                   <div>
-                    <h3 className="text-sm font-medium mb-4">Price Range (KSH)</h3>
+                    <h3 className="text-sm font-medium mb-4">
+                      Price Range (KSH)
+                    </h3>
                     <Slider
                       value={filters.priceRange}
                       min={0}
@@ -246,7 +263,9 @@ const CourseList = () => {
       {loading ? (
         <div className="text-center">Loading...</div>
       ) : (
-        <div className={`grid ${isListView ? 'grid-cols-1' : 'grid-cols-3'} gap-6`}>
+        <div
+          className={`grid ${isListView ? "grid-cols-1" : "grid-cols-3"} gap-6`}
+        >
           {paginatedCourses.map((course) => (
             <CourseCard
               key={course.id}
